@@ -31,6 +31,7 @@ export default function Console({ history }: ConsoleProps) {
 
   useLayoutEffect(() => {
     if (follow) bottom.current?.scrollIntoView();
+    // eslint-disable-next-line react-hooks/exhaustive-deps
   }, [history]);
 
   return (
