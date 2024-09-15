@@ -1,27 +1,36 @@
-import React, {useState, useEffect} from 'react';
+import React, { useState, useEffect } from "react";
 
-import Container from '@material-ui/core/Container';
-import Console from './component/Console';
+import Container from "@material-ui/core/Container";
+import Console from "./component/Console";
 
-import MIDIManager from './logic/MIDIManager';
+import MIDIManager from "./logic/MIDIManager";
+
+const githubUrl = `https://github.com/${
+  process.env.REACT_APP_GITHUB_REPOSITORY ?? "moutend/web-midi-debug"
+}`;
 
 export default function App() {
-  const [history, setHistory] = useState<string[]>([])
-  const [isMIDIManagerInitialized, setIsMIDIManagerInitialized] = useState(false);
+  const [history, setHistory] = useState<string[]>([]);
+  const [isMIDIManagerInitialized, setIsMIDIManagerInitialized] =
+    useState(false);
 
   useEffect(() => {
     let midiManager = new MIDIManager(setHistory);
 
-    window.document.addEventListener("keydown", (event: any) => {
-      const c1 = event.altKey && event.key === "k";
-      const c2 = event.ctrlKey && event.key === "k";
+    window.document.addEventListener(
+      "keydown",
+      (event: any) => {
+        const c1 = event.altKey && event.key === "k";
+        const c2 = event.ctrlKey && event.key === "k";
 
-      if (!(c1 || c2)) {
-        return
-      }
+        if (!(c1 || c2)) {
+          return;
+        }
 
-      midiManager.clearHistory();
-    }, false);
+        midiManager.clearHistory();
+      },
+      false
+    );
 
     setIsMIDIManagerInitialized(true);
   }, [isMIDIManagerInitialized]);
@@ -30,9 +39,13 @@ export default function App() {
     <div>
       <Container maxWidth="sm">
         <h1>Web MIDI Debug</h1>
-        <p>Press <code>Ctrl-K</code> or <code>Alt-K</code> to clear outputs.</p>
-        <Console history={history}/>
-        <p style={{textAlign: "center"}}><a href="https://github.com/moutend/web-midi-debug">View on GitHub</a></p>
+        <p>
+          Press <code>Ctrl-K</code> or <code>Alt-K</code> to clear outputs.
+        </p>
+        <Console history={history} />
+        <p style={{ textAlign: "center" }}>
+          <a href={githubUrl}>View on GitHub</a>
+        </p>
       </Container>
     </div>
   );
