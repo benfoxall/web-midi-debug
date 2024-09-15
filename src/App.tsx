@@ -4,6 +4,7 @@ import Container from '@material-ui/core/Container';
 import Console from './component/Console';
 
 import MIDIManager from './logic/MIDIManager';
+import { REPOSITORY_URL } from './config';
 
 export default function App() {
   const [history, setHistory] = useState<string[]>([])
@@ -32,7 +33,7 @@ export default function App() {
         <h1>Web MIDI Debug</h1>
         <p>Press <code>Ctrl-K</code> or <code>Alt-K</code> to clear outputs.</p>
         <Console history={history}/>
-        <p style={{textAlign: "center"}}><a href="https://github.com/moutend/web-midi-debug">View on GitHub</a></p>
+        <p style={{textAlign: "center"}}><a href={REPOSITORY_URL}>View on GitHub</a></p>
       </Container>
     </div>
   );

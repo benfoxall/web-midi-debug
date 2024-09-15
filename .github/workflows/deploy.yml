@@ -38,5 +38,11 @@ jobs:
     needs: build
 
     steps:
+      - name: Checkout repository
+        uses: actions/checkout@v2
+
+      - name: Set REPOSITORY_URL environment variable
+        run: echo "REPOSITORY_URL=https://github.com/${{ github.repository }}" >> $GITHUB_ENV
+
       - name: Deploy to GitHub Pages
         uses: actions/deploy-pages@v4
